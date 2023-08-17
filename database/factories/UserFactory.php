@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -33,6 +34,15 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    public function default(): static
+    {
+        return $this->state(fn (array $state): array  => [
+            'email' => config('rinance.default_user.email'),
+            'name' => config('rinance.default_user.name'),
+            'password' => Hash::make(config('rinance.default_user.password')),
         ]);
     }
 }
