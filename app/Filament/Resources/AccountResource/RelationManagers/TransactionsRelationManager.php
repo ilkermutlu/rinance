@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\AccountResource\RelationManagers;
 
+use App\Enums\TransactionType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -46,20 +47,17 @@ class TransactionsRelationManager extends RelationManager
                         $numberFormatter = new \NumberFormatter('en_GB', \NumberFormatter::CURRENCY);
                         $moneyFormatter = new IntlMoneyFormatter($numberFormatter, $currencies);
 
-                        return ($record->type === 'out' ? '-' : '')
+                        return ($record->type === TransactionType::MONEY_OUT->value ? '-' : '')
                             . $moneyFormatter->format($money);
                     })
-                    ->color(fn ($record) => $record->type === 'in' ? 'success' : 'danger'),
+                    ->color(fn ($record) => $record->type === TransactionType::MONEY_IN->value ? 'success' : 'danger'),
                 Tables\Columns\TextColumn::make('description')
                     ->searchable(),
             ])
             ->defaultSort('date', 'desc')
             ->filters([
                 SelectFilter::make('type')
-                    ->options([
-                        'in' => 'Money in',
-                        'out' => 'Money out',
-                    ])
+                    ->options(TransactionType::class)
             ],
             layout: FiltersLayout::AboveContent
             );
