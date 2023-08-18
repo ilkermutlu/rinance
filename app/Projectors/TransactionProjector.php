@@ -9,12 +9,12 @@ use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class TransactionProjector extends Projector
 {
-    public function onMoneyAdded(MoneyAdded $event)
+    public function onMoneyAdded(MoneyAdded $event): void
     {
         (new CreateTransactionAction)->execute($event);
     }
 
-    public function onMoneySubtracted(MoneySubtracted $event)
+    public function onMoneySubtracted(MoneySubtracted $event): void
     {
         (new CreateTransactionAction)->execute($event);
     }
