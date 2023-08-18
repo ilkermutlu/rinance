@@ -35,7 +35,6 @@ class TransactionsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('description')
             ->columns([
                 Tables\Columns\TextColumn::make('date')
                     ->sortable(),
@@ -58,8 +57,7 @@ class TransactionsRelationManager extends RelationManager
             ->filters([
                 SelectFilter::make('type')
                     ->options(TransactionType::class)
-            ],
-            layout: FiltersLayout::AboveContent
-            );
+            ], layout: FiltersLayout::AboveContent
+        );
     }
 }
