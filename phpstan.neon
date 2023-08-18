@@ -1,0 +1,19 @@
+parameters:
+
+    paths:
+        - app/
+    type_coverage:
+        return_type: 50
+        param_type: 30
+        property_type: 70
+
+    # Level 9 is the highest level
+    level: 9
+
+#    ignoreErrors:
+#        - '#PHPDoc tag @var#'
+#
+#    excludePaths:
+#        - ./*/*/FileToBeExcluded.php
+#
+#    checkMissingIterableValueType: false
