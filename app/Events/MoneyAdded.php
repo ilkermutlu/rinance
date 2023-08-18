@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Enums\TransactionType;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -15,6 +16,8 @@ class MoneyAdded extends ShouldBeStored
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public string $type;
+
     /**
      * Create a new event instance.
      */
@@ -23,8 +26,9 @@ class MoneyAdded extends ShouldBeStored
         public int $amount,
         public $date,
         public string $description,
-        public string $type = 'in',
-    ) {}
+    ) {
+        $this->type = TransactionType::MONEY_IN->value;
+    }
 
     /**
      * Get the channels the event should broadcast on.
